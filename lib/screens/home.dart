@@ -42,10 +42,14 @@ class _HomeState extends State<Home> {
                         await Navigator.pushNamed(context, '/location');
                     setState(() {
                       data = {
-                        'time': result["time"],
-                        'location': result["location"],
-                        'flag': result["flag"],
-                        'isDayTime': result["isDayTime"],
+                        'time': result == null ? data["time"] : result["time"],
+                        'location': result == null
+                            ? data["location"]
+                            : result["location"],
+                        'flag': result == null ? data["flag"] : result["flag"],
+                        'isDayTime': result == null
+                            ? data["isDayTime"]
+                            : result["isDayTime"],
                       };
                     });
                   },
