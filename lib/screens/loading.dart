@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_world_time_app/services/world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -17,10 +18,12 @@ class _LoadingState extends State<Loading> {
       url: 'Africa/Kinshasa',
     );
     await locationInstance.getTime();
+    // ignore: use_build_context_synchronously
     Navigator.pushReplacementNamed(context, '/home', arguments: {
       'location': locationInstance.location,
       'time': locationInstance.time,
       'flag': locationInstance.flag,
+      'isDayTime': locationInstance.isDayTime,
     });
 
     if (kDebugMode) {
@@ -42,9 +45,11 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(50.0),
-        child: Text("Loading"),
+      body: Center(
+        child: SpinKitPouringHourGlass(
+          color: Colors.blueAccent,
+          size: 100.0,
+        ),
       ),
     );
   }
